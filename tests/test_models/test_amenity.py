@@ -1,21 +1,22 @@
 #!/usr/bin/python3
-"""This module tests the Amenity class"""
-from tests.test_models.test_base_model import TestBaseModel
+""" """
+from tests.test_models.test_base_model import test_basemodel
 from models.amenity import Amenity
+import os
 
 
-class TestAmenity(TestBaseModel):
-    """Tests the Amenity class"""
+class test_Amenity(test_basemodel):
+    """ amenity test class"""
 
-    data = {
-        "__class__": "Amenity",
-        "created_at": "2024-03-19T19:12:06.548029",
-        "id": "0d279dc7-4fdb-4969-962d-c902e73ffadf",
-        "name": "Wifi",
-        "updated_at": "2024-03-19T19:12:06.548249",
-    }
+    def __init__(self, *args, **kwargs):
+        """inti the test class """
+        super().__init__(*args, **kwargs)
+        self.name = "Amenity"
+        self.value = Amenity
 
-    def test_amenity_name(self):
-        """Tests the name attribute of the Amenity class"""
-        new = Amenity(**self.data)
-        self.assertEqual(type(new.name), str)
+    def test_name2(self):
+        """testing name type """
+        new = self.value()
+        self.assertEqual(type(new.name), str if
+                         os.getenv('HBNB_TYPE_STORAGE') != 'db' else
+                         type(None))

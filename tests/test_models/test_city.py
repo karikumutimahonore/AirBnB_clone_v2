@@ -1,28 +1,29 @@
 #!/usr/bin/python3
-"""This module tests the City class"""
-from tests.test_models.test_base_model import TestBaseModel
+""" """
+from tests.test_models.test_base_model import test_basemodel
 from models.city import City
-from models.state import State
+import os
 
 
-class TestCity(TestBaseModel):
-    """Tests the City class"""
+class test_City(test_basemodel):
+    """ tests for city """
 
     def __init__(self, *args, **kwargs):
-        """ """
+        """ init the test class"""
         super().__init__(*args, **kwargs)
         self.name = "City"
         self.value = City
 
     def test_state_id(self):
-        """Tests the state_id attribute of the City class"""
+        """ testing state_id type """
         new = self.value()
-        state = State()
-        new.state_id = state.id
-        self.assertEqual(type(new.state_id), str)
+        self.assertEqual(type(new.state_id), str if
+                         os.getenv('HBNB_TYPE_STORAGE') != 'db' else
+                         type(None))
 
     def test_name(self):
-        """Tests the name attribute of the City class"""
+        """ testing name type"""
         new = self.value()
-        new.name = "Accra"
-        self.assertEqual(type(new.name), str)
+        self.assertEqual(type(new.name), str if
+                         os.getenv('HBNB_TYPE_STORAGE') != 'db' else
+                         type(None))
